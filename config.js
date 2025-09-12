@@ -3,7 +3,7 @@
 
 const CONFIG = {
   // Replace with your actual OpenAI API key
-  OPENAI_API_KEY: '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',
+  OPENAI_API_KEY: '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',
   
   // Chatbot settings
   MODEL: 'gpt-3.5-turbo',
