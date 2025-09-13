@@ -104,3 +104,4 @@ For issues with the chatbot functionality, check:
 ## License
 
 This project is for ASKIMSPORT fitness coaching services.
+

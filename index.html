@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASKIMSPORT — Твій тренер, твій результат</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     :root {
       --primary-color: #000000;
@@ -277,7 +278,12 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .problem-icon .material-icons {
+      font-size: 2.5rem;
       color: white;
     }
 
@@ -333,6 +339,7 @@
       width: 100%;
       height: 400px;
       object-fit: cover;
+      object-position: top;
     }
 
     /* Process Section */
@@ -639,7 +646,8 @@
     }
 
     .chatbot-toggle::before {
-      content: '💬';
+      content: 'chat';
+      font-family: 'Material Icons';
       font-size: 28px;
     }
 
@@ -800,6 +808,337 @@
         right: 15px;
       }
     }
+
+    /* Calculators Section */
+    .calculators-section {
+      padding: 6rem 2rem;
+      background: var(--bg-secondary);
+    }
+
+    .calculators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .calculator-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calculator-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--secondary-color);
+    }
+
+    .calculator-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .calculator-card:hover::before {
+      left: 100%;
+    }
+
+    .calculator-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .calculator-icon .material-icons {
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .calculator-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .calculator-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .calculator-btn {
+      background: var(--secondary-color);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .calculator-card:hover .calculator-btn {
+      background: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    /* Calculator Modal */
+    .calculator-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+
+    .calculator-modal.open {
+      display: flex;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .calculator-popup {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 800px;
+      width: 30%;
+      min-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .calculator-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .calculator-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .calculator-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .calculator-close:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .calculator-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+    }
+
+    .calculate-btn {
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 1.2rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1rem;
+    }
+
+    .calculate-btn:hover {
+      background: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .calculator-result {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      border-left: 4px solid var(--secondary-color);
+      display: none;
+    }
+
+    .calculator-result.show {
+      display: block;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .result-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .result-tips {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .result-tips h4 {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-tips ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .result-tips li {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+
+    /* Mobile responsive for calculators */
+    @media (max-width: 768px) {
+      .calculators-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calculator-popup {
+        width: 95%;
+        min-width: unset;
+        max-width: 95%;
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .calculator-title {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -817,6 +1156,7 @@
         <li><a href="#solution">Рішення</a></li>
         <li><a href="#process">Процес</a></li>
         <li><a href="#testimonials">Відгуки</a></li>
+        <li><a href="#calculators">Калькулятори</a></li>
         <li><a href="#contact">Контакти</a></li>
       </ul>
       <button class="mobile-menu-toggle">☰</button>
@@ -842,17 +1182,17 @@
       </div>
       <div class="problem-grid">
         <div class="problem-card animate-on-scroll">
-          <div class="problem-icon">⏰</div>
+          <div class="problem-icon"><span class="material-icons">schedule</span></div>
           <h3>Нестача часу</h3>
           <p>Складні програми тренувань, які забирають багато часу та не підходять для зайнятих людей з сім'єю та роботою.</p>
         </div>
         <div class="problem-card animate-on-scroll">
-          <div class="problem-icon">��️</div>
+          <div class="problem-icon"><span class="material-icons">restaurant</span></div>
           <h3>Жорсткі дієти</h3>
           <p>Виснажливі дієти, які вимагають відмови від улюблених страв та створюють постійний стрес.</p>
         </div>
         <div class="problem-card animate-on-scroll">
-          <div class="problem-icon">��</div>
+          <div class="problem-icon"><span class="material-icons">trending_down</span></div>
           <h3>Відсутність результатів</h3>
           <p>Багато хто здається, не бачачи швидкого прогресу та не розуміючи, чому програми не працюють.</p>
         </div>
@@ -871,7 +1211,7 @@
           <a href="https://www.instagram.com/askimsport/" class="btn btn-secondary">Дізнатися більше</a>
         </div>
         <div class="solution-image animate-on-scroll">
-          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="Фітнес тренер Саша">
+          <img src="fitnestrainer.webp" alt="Фітнес тренер Саша">
         </div>
       </div>
     </div>
@@ -931,6 +1271,36 @@
     </div>
   </section>
 
+  <!-- Calculators Section -->
+  <section class="calculators-section" id="calculators">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">Корисні калькулятори</h2>
+        <p class="section-subtitle">Розрахуйте важливі показники для вашого здоров'я та фітнесу</p>
+      </div>
+      <div class="calculators-grid">
+        <div class="calculator-card animate-on-scroll" onclick="openCalculator('water')">
+          <div class="calculator-icon"><span class="material-icons">water_drop</span></div>
+          <h3>Калькулятор води</h3>
+          <p>Скільки води потрібно пити на день в залежності від ваги та активності</p>
+          <div class="calculator-btn">Розрахувати</div>
+        </div>
+        <div class="calculator-card animate-on-scroll" onclick="openCalculator('weight')">
+          <div class="calculator-icon"><span class="material-icons">monitor_weight</span></div>
+          <h3>Ідеальна вага</h3>
+          <p>Орієнтир ідеальної ваги для вашого зросту та типу статури</p>
+          <div class="calculator-btn">Розрахувати</div>
+        </div>
+        <div class="calculator-card animate-on-scroll" onclick="openCalculator('timeline')">
+          <div class="calculator-icon"><span class="material-icons">event</span></div>
+          <h3>Днів до цілі</h3>
+          <p>Скільки часу потрібно, щоб досягнути бажаної ваги за безпечним темпом</p>
+          <div class="calculator-btn">Розрахувати</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="cta-section" id="contact">
     <div class="container">
@@ -967,6 +1337,35 @@
       <div class="chatbot-input-container">
         <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Напишіть ваше питання...">
         <button class="chatbot-send" id="chatbotSend">Відправити</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculator Modals -->
+  <div class="calculator-modal" id="calculatorModal">
+    <div class="calculator-popup">
+      <div class="calculator-header">
+        <div class="calculator-title" id="modalTitle">
+          <span id="modalIcon">💧</span>
+          <span id="modalTitleText">Калькулятор води</span>
+        </div>
+        <button class="calculator-close" onclick="closeCalculator()">×</button>
+      </div>
+      
+      <div class="calculator-form" id="calculatorForm">
+        <!-- Form content will be dynamically inserted here -->
+      </div>
+      
+      <div class="calculator-result" id="calculatorResult">
+        <div class="result-title" id="resultTitle">Результат</div>
+        <div class="result-value" id="resultValue">0</div>
+        <div class="result-description" id="resultDescription">Опис результату</div>
+        <div class="result-tips" id="resultTips">
+          <h4>Корисні поради:</h4>
+          <ul id="tipsList">
+            <!-- Tips will be dynamically inserted here -->
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1383,22 +1782,22 @@
       }
 
       askForWeight() {
-        this.addMessage('bot', '⚖️ Дякую! Тепер скажіть, будь ласка, вашу вагу (в кілограмах)?');
+        this.addMessage('bot', '⚖🍽️ Дякую! Тепер скажіть, будь ласка, вашу вагу (в кілограмах)?');
         this.dataCollectionStep = 2;
       }
 
       askForActivityLevel() {
-        this.addMessage('bot', '🏃‍♀️ Чудово! Як би ви оцінили свій рівень активності?\n\n1️⃣ Малорухливий (сидяча робота, мало спорту)\n2️⃣ Помірно активний (легкі прогулянки, тренування 1-2 рази на тиждень)\n3️⃣ Активний (регулярні тренування 3-4 рази на тиждень)\n4️⃣ Дуже активний (інтенсивні тренування 5+ разів на тиждень)\n\nВиберіть цифру від 1 до 4:');
+        this.addMessage('bot', '🏃‍♀🍽️ Чудово! Як би ви оцінили свій рівень активності?\n\n1🍽️⃣ Малорухливий (сидяча робота, мало спорту)\n2🍽️⃣ Помірно активний (легкі прогулянки, тренування 1-2 рази на тиждень)\n3🍽️⃣ Активний (регулярні тренування 3-4 рази на тиждень)\n4🍽️⃣ Дуже активний (інтенсивні тренування 5+ разів на тиждень)\n\nВиберіть цифру від 1 до 4:');
         this.dataCollectionStep = 3;
       }
 
       askForFitnessLevel() {
-        this.addMessage('bot', '💪 Відмінно! Тепер оцініть свій рівень фізичної підготовки:\n\n1️⃣ Початківець (тільки починаю займатися спортом)\n2️⃣ Нижче середнього (маю базові навички)\n3️⃣ Середній (можу виконувати складніші вправи)\n4️⃣ Вище середнього (досвідчений у спорті)\n5️⃣ Просунутий (професійний рівень)\n\nВиберіть цифру від 1 до 5:');
+        this.addMessage('bot', '💪 Відмінно! Тепер оцініть свій рівень фізичної підготовки:\n\n1🍽️⃣ Початківець (тільки починаю займатися спортом)\n2🍽️⃣ Нижче середнього (маю базові навички)\n3🍽️⃣ Середній (можу виконувати складніші вправи)\n4🍽️⃣ Вище середнього (досвідчений у спорті)\n5🍽️⃣ Просунутий (професійний рівень)\n\nВиберіть цифру від 1 до 5:');
         this.dataCollectionStep = 4;
       }
 
       askForGoals() {
-        this.addMessage('bot', '🎯 Останнє питання! Які у вас основні цілі?\n\n1️⃣ Схуднути\n2️⃣ Набрати м\'язову масу\n3️⃣ Підтримувати форму\n4️⃣ Покращити витривалість\n5️⃣ Зміцнити м\'язи\n6️⃣ Всі вище перелічені\n\nВиберіть цифру або опишіть свої цілі:');
+        this.addMessage('bot', '🎯 Останнє питання! Які у вас основні цілі?\n\n1🍽️⃣ Схуднути\n2🍽️⃣ Набрати м\'язову масу\n3🍽️⃣ Підтримувати форму\n4🍽️⃣ Покращити витривалість\n5🍽️⃣ Зміцнити м\'язи\n6🍽️⃣ Всі вище перелічені\n\nВиберіть цифру або опишіть свої цілі:');
         this.dataCollectionStep = 5;
       }
 
@@ -1409,7 +1808,7 @@
         this.saveUserProfile(); // Save to localStorage
         
         const profile = this.userProfile;
-        this.addMessage('bot', `🎉 Дякую за інформацію! Ось ваш профіль:\n\n📊 Вік: ${profile.age} років\n⚖️ Вага: ${profile.weight} кг\n🏃‍♀️ Активність: ${this.getActivityLevelText(profile.activityLevel)}\n💪 Рівень фітнесу: ${this.getFitnessLevelText(profile.fitnessLevel)}\n🎯 Цілі: ${this.getGoalsText(profile.goals)}\n\nТепер я можу давати вам більш персоналізовані поради! Що вас цікавить?`);
+        this.addMessage('bot', `🎉 Дякую за інформацію! Ось ваш профіль:\n\n📊 Вік: ${profile.age} років\n⚖🍽️ Вага: ${profile.weight} кг\n🏃‍♀🍽️ Активність: ${this.getActivityLevelText(profile.activityLevel)}\n💪 Рівень фітнесу: ${this.getFitnessLevelText(profile.fitnessLevel)}\n🎯 Цілі: ${this.getGoalsText(profile.goals)}\n\nТепер я можу давати вам більш персоналізовані поради! Що вас цікавить?`);
       }
 
       getActivityLevelText(level) {
@@ -1536,6 +1935,244 @@
         localStorage.removeItem('askimFitUserProfile');
         this.addMessage('bot', 'Профіль очищено! Напишіть "СТАРТ" для створення нового профілю.');
       }
+    }
+
+    // ========================================
+    // FITNESS CALCULATORS
+    // ========================================
+    
+    function openCalculator(type) {
+      const modal = document.getElementById('calculatorModal');
+      const modalIcon = document.getElementById('modalIcon');
+      const modalTitle = document.getElementById('modalTitleText');
+      const form = document.getElementById('calculatorForm');
+      const result = document.getElementById('calculatorResult');
+      
+      // Hide result initially
+      result.classList.remove('show');
+      
+      // Set modal content based on calculator type
+      switch(type) {
+        case 'water':
+          modalIcon.innerHTML = '<span class="material-icons">water_drop</span>';
+          modalTitle.textContent = 'Калькулятор води';
+          form.innerHTML = `
+            <div class="form-group">
+              <label for="weight">Ваша вага (кг):</label>
+              <input type="number" id="weight" placeholder="Наприклад: 70" min="20" max="300" required>
+            </div>
+            <div class="form-group">
+              <label for="activity">Рівень активності:</label>
+              <select id="activity" required>
+                <option value="">Оберіть рівень</option>
+                <option value="low">Малорухливий (сидяча робота)</option>
+                <option value="moderate">Помірно активний (легкі прогулянки)</option>
+                <option value="active">Активний (регулярні тренування)</option>
+                <option value="very-active">Дуже активний (інтенсивні тренування)</option>
+              </select>
+            </div>
+            <button class="calculate-btn" onclick="calculateWater()">Розрахувати</button>
+          `;
+          break;
+          
+        case 'weight':
+          modalIcon.innerHTML = '<span class="material-icons">monitor_weight</span>';
+          modalTitle.textContent = 'Калькулятор ідеальної ваги';
+          form.innerHTML = `
+            <div class="form-group">
+              <label for="height">Ваш зріст (см):</label>
+              <input type="number" id="height" placeholder="Наприклад: 170" min="100" max="250" required>
+            </div>
+            <div class="form-group">
+              <label for="gender">Стать:</label>
+              <select id="gender" required>
+                <option value="">Оберіть стать</option>
+                <option value="male">Чоловік</option>
+                <option value="female">Жінка</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bodyType">Тип статури:</label>
+              <select id="bodyType" required>
+                <option value="">Оберіть тип</option>
+                <option value="small">Тонка статура</option>
+                <option value="medium">Середня статура</option>
+                <option value="large">Широка статура</option>
+              </select>
+            </div>
+            <button class="calculate-btn" onclick="calculateIdealWeight()">Розрахувати</button>
+          `;
+          break;
+          
+        case 'timeline':
+          modalIcon.innerHTML = '<span class="material-icons">event</span>';
+          modalTitle.textContent = 'Калькулятор днів до цілі';
+          form.innerHTML = `
+            <div class="form-group">
+              <label for="currentWeight">Поточна вага (кг):</label>
+              <input type="number" id="currentWeight" placeholder="Наприклад: 80" min="20" max="300" required>
+            </div>
+            <div class="form-group">
+              <label for="targetWeight">Бажана вага (кг):</label>
+              <input type="number" id="targetWeight" placeholder="Наприклад: 70" min="20" max="300" required>
+            </div>
+            <div class="form-group">
+              <label for="weightLossRate">Темп схуднення:</label>
+              <select id="weightLossRate" required>
+                <option value="0.25">0.25 кг/тиждень (повільний)</option>
+                <option value="0.5" selected>0.5 кг/тиждень (рекомендований)</option>
+                <option value="0.75">0.75 кг/тиждень (швидкий)</option>
+                <option value="1">1 кг/тиждень (дуже швидкий)</option>
+              </select>
+            </div>
+            <button class="calculate-btn" onclick="calculateTimeline()">Розрахувати</button>
+          `;
+          break;
+      }
+      
+      modal.classList.add('open');
+    }
+    
+    function closeCalculator() {
+      const modal = document.getElementById('calculatorModal');
+      modal.classList.remove('open');
+    }
+    
+    // Close modal when clicking outside
+    document.getElementById('calculatorModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeCalculator();
+      }
+    });
+    
+    function calculateWater() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const activity = document.getElementById('activity').value;
+      
+      if (!weight || !activity) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+      }
+      
+      // Base water calculation: 35ml per kg of body weight
+      let baseWater = weight * 35;
+      
+      // Activity multipliers
+      const activityMultipliers = {
+        'low': 1.0,
+        'moderate': 1.2,
+        'active': 1.4,
+        'very-active': 1.6
+      };
+      
+      const totalWater = Math.round(baseWater * activityMultipliers[activity]);
+      const glasses = Math.round(totalWater / 250); // 250ml per glass
+      
+      const result = document.getElementById('calculatorResult');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultValue = document.getElementById('resultValue');
+      const resultDescription = document.getElementById('resultDescription');
+      const tipsList = document.getElementById('tipsList');
+      
+      resultTitle.textContent = 'Рекомендована кількість води';
+      resultValue.textContent = `${totalWater} мл (${glasses} склянок)`;
+      resultDescription.textContent = `Для вашої ваги ${weight} кг та рівня активності "${activity}" рекомендовано випивати ${totalWater} мл води на день.`;
+      
+      tipsList.innerHTML = `
+        <li>Почніть день зі склянки води натщесерце</li>
+        <li>Пийте воду за 30 хвилин до їжі</li>
+        <li>Не чекайте відчуття спраги</li>
+        <li>Додайте лимон або м'яту для смаку</li>
+        <li>Обмежте каву та алкоголь</li>
+      `;
+      
+      result.classList.add('show');
+    }
+    
+    function calculateIdealWeight() {
+      const height = parseFloat(document.getElementById('height').value);
+      const gender = document.getElementById('gender').value;
+      const bodyType = document.getElementById('bodyType').value;
+      
+      if (!height || !gender || !bodyType) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+      }
+      
+      // BMI-based ideal weight calculation
+      let idealBMI;
+      if (gender === 'male') {
+        idealBMI = bodyType === 'small' ? 20 : bodyType === 'medium' ? 22 : 24;
+      } else {
+        idealBMI = bodyType === 'small' ? 18.5 : bodyType === 'medium' ? 21 : 23;
+      }
+      
+      const idealWeight = Math.round((idealBMI * height * height) / 10000);
+      const weightRange = {
+        min: Math.round(idealWeight * 0.9),
+        max: Math.round(idealWeight * 1.1)
+      };
+      
+      const result = document.getElementById('calculatorResult');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultValue = document.getElementById('resultValue');
+      const resultDescription = document.getElementById('resultDescription');
+      const tipsList = document.getElementById('tipsList');
+      
+      resultTitle.textContent = 'Ідеальна вага';
+      resultValue.textContent = `${idealWeight} кг`;
+      resultDescription.textContent = `Для зросту ${height} см, статі "${gender}" та типу статури "${bodyType}" ідеальна вага становить ${idealWeight} кг. Здоровий діапазон: ${weightRange.min}-${weightRange.max} кг.`;
+      
+      tipsList.innerHTML = `
+        <li>Це орієнтовні значення, враховуйте індивідуальні особливості</li>
+        <li>Консультуйтесь з лікарем перед зміною ваги</li>
+        <li>Фокусуйтесь на здоров'ї, а не тільки на цифрах</li>
+        <li>Враховуйте м'язову масу та жирові відкладення</li>
+        <li>Регулярно контролюйте показники здоров'я</li>
+      `;
+      
+      result.classList.add('show');
+    }
+    
+    function calculateTimeline() {
+      const currentWeight = parseFloat(document.getElementById('currentWeight').value);
+      const targetWeight = parseFloat(document.getElementById('targetWeight').value);
+      const weightLossRate = parseFloat(document.getElementById('weightLossRate').value);
+      
+      if (!currentWeight || !targetWeight || !weightLossRate) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+      }
+      
+      if (targetWeight >= currentWeight) {
+        alert('Бажана вага повинна бути меншою за поточну');
+        return;
+      }
+      
+      const weightToLose = currentWeight - targetWeight;
+      const weeksNeeded = Math.ceil(weightToLose / weightLossRate);
+      const monthsNeeded = Math.round(weeksNeeded / 4.33 * 10) / 10; // More precise month calculation
+      const daysNeeded = weeksNeeded * 7;
+      
+      const result = document.getElementById('calculatorResult');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultValue = document.getElementById('resultValue');
+      const resultDescription = document.getElementById('resultDescription');
+      const tipsList = document.getElementById('tipsList');
+      
+      resultTitle.textContent = 'Час досягнення цілі';
+      resultValue.textContent = `${weeksNeeded} тижнів (${monthsNeeded} місяців)`;
+      resultDescription.textContent = `Щоб схуднути з ${currentWeight} кг до ${targetWeight} кг (${weightToLose} кг) за темпом ${weightLossRate} кг/тиждень, потрібно ${weeksNeeded} тижнів.`;
+      
+      tipsList.innerHTML = `
+        <li>Це орієнтовний час, індивідуальні результати можуть відрізнятися</li>
+        <li>Поступове схуднення безпечніше для здоров'я</li>
+        <li>Поєднуйте дієту з регулярними тренуваннями</li>
+        <li>Ведіть щоденник харчування та ваги</li>
+        <li>Консультуйтесь з фахівцями для індивідуального плану</li>
+      `;
+      
+      result.classList.add('show');
     }
 
     // Initialize chatbot
